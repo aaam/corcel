@@ -19,6 +19,7 @@ class Post extends Eloquent
 
     protected $table = 'posts';
     protected $primaryKey = 'ID';
+    protected $dates = ['post_date', 'post_date_gmt', 'post_modified', 'post_modified', 'post_modified_gmt'];
     protected $with = array('meta');
 
     /**
@@ -54,6 +55,17 @@ class Post extends Eloquent
     public function comments()
     {
         return $this->hasMany('Corcel\Comment', 'comment_post_ID');
+    }
+
+    /**
+    *   Author relationship
+    * 
+    *   @return Illuminate\Database\Eloquent\Collection
+    */
+    public function author(){
+
+        return $this->belongsTo('\Corcel\Author', 'ID');
+
     }
 
     /**
